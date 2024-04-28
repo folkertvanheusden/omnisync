@@ -1,0 +1,15 @@
+0.1 initial release
+
+0.2 more verbose output to help debugging, write measurements to file (if wanted), write pid to file if daemon, set user to run as, read-only mode, setting of fudge factor added, max. offset configurable, configurable sleep interval, time/daytime can now set port, added measurements statistics, added support for the snts protocol
+
+0.3 added irc protocol
+
+0.4 added initially stepping; this speeds up initial syncing and solves the problem where the initial offset is too large for ntpd
+
+0.5 added ICMP TIMESTAMP request ("syncing via ping requests")
+
+0.6 now correctly sets the precision for icmp timestamp, now compiles on IRIX as well, initial clock set can now use average of multiple measurements, added synchronizing against an SNMP server
+
+0.7 implemented proper timeouts, added simple PTP handler (version 1 only currently and not the complete interaction between server and client, just receiving)
+
+0.8 now one can select what ip address to accept for broadcasts (snts and ptp), added syncing against an (S)NTP server via a Socks5 proxy

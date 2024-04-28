@@ -1,0 +1,12 @@
+int resolve_host(char *host, struct sockaddr_in *addr);
+int connect_to(char *bindto, char *host, int portnr);
+int udp_socket(char *bindto);
+ssize_t READ(int fd, char *whereto, size_t len);
+ssize_t WRITE(int fd, char *whereto, size_t len);
+int write_pidfile(char *fname);
+char * mystrdup(char *in);
+int find_string_offset(char *str, char *what);
+void * myrealloc(void *what, int new_len);
+void mysleep(int sleep_left);
+int wait_for_socket(int fd, double timeout);
+int bind_socket_to_address(int fd, char *bindto);

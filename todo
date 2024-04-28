@@ -1,0 +1,7 @@
+- sync op date van file op nfs ofzo?
+- The Flooding Time Synchronization Protocol http://citeseer.ist.psu.edu/749351.html
+- http://digistamp.com/reference/rfc3161.htm
+- bij http: timezone parsen en vergelijken met current timezone (gettimeofday() output?)
+- irc timezone
+- 'net time' (netbios)
+- socks4/5 proxy

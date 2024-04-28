@@ -1,0 +1,29 @@
+VERSION=0.6
+
+DEBUG=-g -pedantic #-pg #-fprofile-arcs
+LDFLAGS=-lssl -lcrypto -lm $(DEBUG)
+CFLAGS+=-O2 -DVERSION=\"$(VERSION)\" $(DEBUG) -DIRIX
+
+OBJS=error.o log.o utils.o daytime.o time.o mssl.o http.o snts.o irc.o icmp.o ntpd.o main.o
+
+all: omnisync
+
+omnisync: $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) -o omnisync
+
+install: omnisync
+	cp omnisync $(DESTDIR)/usr/local/sbin
+
+uninstall: clean
+	rm -f $(DESTDIR)/usr/local/sbin/omnisync
+
+clean:
+	rm -f $(OBJS) omnisync core gmon.out *.da
+
+package: clean
+	# source package
+	rm -rf omnisync-$(VERSION)*
+	mkdir omnisync-$(VERSION)
+	cp *.c *.h Makefile readme.txt Changes license.txt omnisync-$(VERSION)
+	tar czf omnisync-$(VERSION).tgz omnisync-$(VERSION)
+	rm -rf omnisync-$(VERSION)
