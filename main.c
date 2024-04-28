@@ -67,7 +67,7 @@ int do_measure(int mode, char *host, int host_port, int ip_mode, double timeout,
 	}
 	else if (mode == TIME_SNTS)
 	{
-		rc = snts(interface_addr, snts_group, host, ts_start_recv, ts_measurement);
+		rc = snts(interface_addr, host_port, snts_group, host, ts_start_recv, ts_measurement);
 	}
 	else if (mode == TIME_IRC)
 	{

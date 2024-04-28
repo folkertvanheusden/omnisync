@@ -1,8 +1,8 @@
 VERSION=1.0
 
 DEBUG=-g -pedantic #-pg #-fprofile-arcs
-LDFLAGS=-lssl -lcrypto -lm -lsnmp $(DEBUG)
-CFLAGS+=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
+LDFLAGS=-lssl -lcrypto -lm -lsnmp $(DEBUG) -flto
+CFLAGS+=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG) -flto
 
 OBJS=error.o log.o utils.o utils2.o daytime.o time.o mssl.o http.o snts.o irc.o icmp.o ntpd.o snmp.o simpleptp.o socks5sntp.o main.o sntp.o
 
