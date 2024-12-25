@@ -1,5 +1,7 @@
 Building:
 --------
+Make sure you have libsnmp-dev installed.
+
 make install
 
 on IRIX:
