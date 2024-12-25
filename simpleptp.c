@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <unistd.h>
@@ -20,6 +21,7 @@ int simple_ptp(int port, char *interface_addr, char *allowed_ip, double timeout,
 	struct ip_mreq imr;
 	struct in_addr interfaceAddr, netAddr;
 	struct sockaddr_in raddr;
+	char *temp = NULL, *colon = NULL;
 	socklen_t raddr_len;
 	int fd = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
 	if (fd == -1)
@@ -31,8 +33,13 @@ int simple_ptp(int port, char *interface_addr, char *allowed_ip, double timeout,
 	if (!inet_aton(PTP_EVENT_MULTICAST_IP_ADDR, &netAddr))
 		error_exit("simple_ptp: inet_aton(%s) failed", PTP_EVENT_MULTICAST_IP_ADDR);
 
-	if (!inet_aton(interface_addr, &interfaceAddr))
-		error_exit("simple_ptp: inet_aton(%s) failed", interface_addr);
+	temp = strdup(interface_addr);
+	colon = strchr(temp, ':');
+	if (colon)
+		*colon = 0x00;
+	if (!inet_aton(temp, &interfaceAddr))
+		error_exit("simple_ptp: inet_aton(%s) failed", temp);
+	free(temp);
 
 	imr.imr_multiaddr.s_addr = netAddr.s_addr;
 	imr.imr_interface.s_addr = interfaceAddr.s_addr;

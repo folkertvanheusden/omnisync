@@ -67,9 +67,9 @@ int set_tcp_low_latency(int sock)
 	return 0;
 }
 
-int bind_socket_to_address(int fd, char *bindto)
+int bind_socket_to_address(int fd, char *bindto_in)
 {
-	char *temp = strdup(bindto);
+	char *temp = strdup(bindto_in);
 	struct sockaddr_in from;
 	char *colon = strchr(temp, ':');
 	int port = 0;
@@ -80,7 +80,7 @@ int bind_socket_to_address(int fd, char *bindto)
 		port = atoi(colon + 1);
 	}
 
-	if (inet_aton(bindto, &from.sin_addr) == 0)
+	if (inet_aton(temp, &from.sin_addr) == 0)
 	{
 		dolog(LOG_ERR, "bind_socket_to_address: failed converting address");
 		free(temp);
