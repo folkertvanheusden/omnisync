@@ -84,6 +84,8 @@ int simple_ptp(int port, char *interface_addr, char *allowed_ip, double timeout,
 			close(fd);
 			return 0;
 		}
+
+		dolog(LOG_DEBUG, "simple_ptp: version is %d and type is %d", buffer[1] & 15, buffer[0] & 15);
 	}
 
 	dolog(LOG_WARNING, "simple_ptp: No valid message received in %d tries", PTP_RECV_TRIES);
